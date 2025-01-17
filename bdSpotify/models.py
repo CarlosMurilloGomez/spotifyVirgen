@@ -26,12 +26,14 @@ class Genero(models.Model):
 
 class Album(models.Model):
     nombre = models.CharField(max_length=100)
+    def __str__(self):
+        return self.nombre
 
 class Cancion(models.Model):
     titulo = models.CharField(max_length=200)
     artista = models.CharField(max_length=200)
-    album = models.ForeignKey(Album, on_delete=CASCADE, related_name="album")
-    genero = models.ForeignKey(Plan, on_delete=models.CASCADE, related_name="genero")
+    album = models.CharField(max_length=200)
+    genero = models.CharField(max_length=200)
     duracion = models.IntegerField()
     fecha_lanzamiento = models.DateField()
 
