@@ -32,8 +32,8 @@ class Album(models.Model):
 class Cancion(models.Model):
     titulo = models.CharField(max_length=200)
     artista = models.CharField(max_length=200)
-    album = models.CharField(max_length=200)
-    genero = models.CharField(max_length=200)
+    album = models.CharField(max_length=200, blank=True, null=True)
+    genero = models.ForeignKey(Genero, on_delete=models.CASCADE)
     duracion = models.IntegerField()
     fecha_lanzamiento = models.DateField()
 
