@@ -1,9 +1,6 @@
-from tkinter.constants import CASCADE
-
 from django.db import models
 
 # Create your models here.
-
 
 class Plan(models.Model):
     nombre = models.CharField(max_length=100)
@@ -11,6 +8,7 @@ class Plan(models.Model):
 
     def __str__(self):
         return self.nombre
+
 class Usuario(models.Model):
     email = models.EmailField(unique=True)
     fecha_nacimiento = models.DateField(null=True, blank=True)
@@ -19,6 +17,7 @@ class Usuario(models.Model):
 
     def __str__(self):
         return self.email
+
 class Genero(models.Model):
     nombre = models.CharField(max_length=200)
     def __str__(self):
@@ -26,20 +25,20 @@ class Genero(models.Model):
 
 class Album(models.Model):
     nombre = models.CharField(max_length=100)
+
     def __str__(self):
-        return self.nombre
+        return f'{self.id} - {self.nombre}'
 
 class Cancion(models.Model):
     titulo = models.CharField(max_length=200)
     artista = models.CharField(max_length=200)
-    album = models.CharField(max_length=200, blank=True, null=True)
-    genero = models.ForeignKey(Genero, on_delete=models.CASCADE)
+    genero = models.ForeignKey(Genero, on_delete=models.CASCADE, blank=True, null=True)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, blank=True, null=True)
     duracion = models.IntegerField()
     fecha_lanzamiento = models.DateField()
 
     def __str__(self):
         return f"{self.titulo} - {self.artista}"
-
 
 class Lista(models.Model):
     nombre = models.CharField(max_length=200)
